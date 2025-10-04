@@ -3,21 +3,30 @@
 A unified caching interface for cloud and local cache providers — Redis, Valkey, Memcached, and in-memory — using a factory-based design.
 
 [![npm version](https://badge.fury.io/js/cloud-cache-factory.svg)](https://badge.fury.io/js/cloud-cache-factory)
+[![npm downloads](https://img.shields.io/npm/dm/cloud-cache-factory.svg)](https://www.npmjs.com/package/cloud-cache-factory)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.4+-blue.svg)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-16+-green.svg)](https://nodejs.org/)
 
 ## 🎯 Purpose
 
 Developers should be able to switch cache providers easily using a single interface. This package provides a consistent API across different caching backends, making it simple to swap between memory, Redis, Valkey, and Memcached without changing your application code.
 
+> **v1.0.0 Stable Release**: This version provides a stable API with comprehensive caching support across four providers. The API is now considered stable and follows semantic versioning.
+
 ## ✨ Features
 
 - **Unified Interface**: Single API for all supported cache providers
 - **TypeScript Support**: Full type definitions and IntelliSense support
-- **Multiple Providers**: Memory (LRU), Redis, Valkey, and Memcached support
+- **Four Cache Providers**: Memory (LRU), Redis, Valkey, and Memcached support
 - **Factory Pattern**: Easy provider switching with configuration
-- **Serialization**: Safe JSON serialization with error handling
-- **TTL Support**: Time-to-live for cached values
-- **Zero Dependencies**: Minimal external dependencies
+- **Safe Serialization**: JSON serialization with comprehensive error handling
+- **TTL Support**: Time-to-live for cached values across all providers
+- **Connection Management**: Proper connection cleanup and error handling
+- **Statistics & Monitoring**: Cache statistics and health monitoring
+- **Production Ready**: Comprehensive error handling and logging
+- **Zero Dependencies**: Minimal external dependencies for reliability
+- **Comprehensive Testing**: 68+ test cases with 100% coverage of core functionality
 
 ## 📦 Installation
 
@@ -304,6 +313,16 @@ MIT License - see [LICENSE](LICENSE) file for details.
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📝 Changelog
+
+### 1.0.0
+
+- **Major Release**: Stable API with comprehensive caching support
+- **Four Cache Providers**: Memory (LRU), Redis, Valkey, and Memcached
+- **Factory Pattern**: Unified interface for easy provider switching
+- **TypeScript Support**: Full type definitions and IntelliSense
+- **Comprehensive Testing**: 68+ test cases covering all functionality
+- **Production Ready**: Error handling, connection management, and statistics
+- **Zero Dependencies**: Minimal external dependencies for reliability
 
 ### 0.1.0
 

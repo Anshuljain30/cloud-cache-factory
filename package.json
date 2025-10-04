@@ -1,7 +1,7 @@
 {
   "name": "cloud-cache-factory",
-  "version": "0.1.0",
-  "description": "A unified caching interface for Redis, Valkey, and in-memory stores.",
+  "version": "1.0.1",
+  "description": "A unified caching interface for Redis, Valkey, Memcached, and in-memory stores.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
@@ -27,9 +27,22 @@
     "redis",
     "memory",
     "valkey",
+    "memcached",
     "factory",
-    "cloud"
+    "cloud",
+    "typescript"
   ],
+  "author": {
+    "name": "Anshul Jain"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anshuljain30/cloud-cache-factory.git"
+  },
+  "homepage": "https://github.com/anshuljain30/cloud-cache-factory#readme",
+  "bugs": {
+    "url": "https://github.com/anshuljain30/cloud-cache-factory/issues"
+  },
   "license": "MIT",
   "files": [
     "dist/**/*",
