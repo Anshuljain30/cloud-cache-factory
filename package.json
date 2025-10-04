@@ -1,0 +1,40 @@
+{
+  "name": "cloud-cache-factory",
+  "version": "0.1.0",
+  "description": "A unified caching interface for Redis, Valkey, and in-memory stores.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "dev": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "ioredis": "^5.4.1",
+    "lru-cache": "^10.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.4.5",
+    "vitest": "^1.2.1"
+  },
+  "keywords": [
+    "cache",
+    "redis",
+    "memory",
+    "valkey",
+    "factory",
+    "cloud"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
