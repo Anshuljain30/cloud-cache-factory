@@ -4,6 +4,7 @@ import {
   createMemoryCache,
   createRedisCache,
   createValkeyCache,
+  createMemcachedCache,
 } from "../src/createCache.js";
 
 // Mock the adapters
@@ -17,6 +18,10 @@ vi.mock("../src/adapters/redis.js", () => ({
 
 vi.mock("../src/adapters/valkey.js", () => ({
   ValkeyAdapter: vi.fn().mockImplementation(() => ({ type: "valkey" })),
+}));
+
+vi.mock("../src/adapters/memcached.js", () => ({
+  MemcachedAdapter: vi.fn().mockImplementation(() => ({ type: "memcached" })),
 }));
 
 describe("createCache factory", () => {
@@ -59,6 +64,19 @@ describe("createCache factory", () => {
     expect(cache).toHaveProperty("type", "valkey");
   });
 
+  it("should create Memcached cache", () => {
+    const cache = createCache({ provider: "memcached" });
+    expect(cache).toHaveProperty("type", "memcached");
+  });
+
+  it("should create Memcached cache with options", () => {
+    const cache = createCache({
+      provider: "memcached",
+      options: { host: "localhost", port: 11211 },
+    });
+    expect(cache).toHaveProperty("type", "memcached");
+  });
+
   it("should throw error for unsupported provider", () => {
     expect(() => {
       createCache({ provider: "unsupported" as any });
@@ -95,5 +113,15 @@ describe("individual cache creators", () => {
   it("should create Valkey cache with options", () => {
     const cache = createValkeyCache({ host: "localhost" });
     expect(cache).toHaveProperty("type", "valkey");
+  });
+
+  it("should create Memcached cache directly", () => {
+    const cache = createMemcachedCache();
+    expect(cache).toHaveProperty("type", "memcached");
+  });
+
+  it("should create Memcached cache with options", () => {
+    const cache = createMemcachedCache({ host: "localhost" });
+    expect(cache).toHaveProperty("type", "memcached");
   });
 });

@@ -1,7 +1,7 @@
 /**
  * Cache provider types
  */
-export type CacheProvider = "memory" | "redis" | "valkey";
+export type CacheProvider = "memory" | "redis" | "valkey" | "memcached";
 
 /**
  * Cache configuration interface
@@ -73,3 +73,22 @@ export interface RedisCacheOptions {
  * Valkey cache options (same as Redis)
  */
 export type ValkeyCacheOptions = RedisCacheOptions;
+
+/**
+ * Memcached cache options
+ */
+export interface MemcachedCacheOptions {
+  hosts?: string[];
+  host?: string;
+  port?: number;
+  timeout?: number;
+  retries?: number;
+  retry?: number;
+  retry_delay?: number;
+  failures?: number;
+  poolSize?: number;
+  reconnect?: number;
+  idle?: number;
+  namespace?: string;
+  [key: string]: any;
+}

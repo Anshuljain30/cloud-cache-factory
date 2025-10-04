@@ -13,12 +13,14 @@ export {
   createMemoryCache,
   createRedisCache,
   createValkeyCache,
+  createMemcachedCache,
 } from "./createCache.js";
 
 // Cache adapters
 export { MemoryAdapter } from "./adapters/memory.js";
 export { RedisAdapter } from "./adapters/redis.js";
 export { ValkeyAdapter } from "./adapters/valkey.js";
+export { MemcachedAdapter } from "./adapters/memcached.js";
 
 // Types and interfaces
 export type {
@@ -28,6 +30,7 @@ export type {
   MemoryCacheOptions,
   RedisCacheOptions,
   ValkeyCacheOptions,
+  MemcachedCacheOptions,
 } from "./types/index.js";
 
 // Utilities

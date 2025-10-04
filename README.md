@@ -1,19 +1,19 @@
 # Cloud Cache Factory
 
-A unified caching interface for cloud and local cache providers — Redis, Valkey, and in-memory — using a factory-based design.
+A unified caching interface for cloud and local cache providers — Redis, Valkey, Memcached, and in-memory — using a factory-based design.
 
 [![npm version](https://badge.fury.io/js/cloud-cache-factory.svg)](https://badge.fury.io/js/cloud-cache-factory)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 🎯 Purpose
 
-Developers should be able to switch cache providers easily using a single interface. This package provides a consistent API across different caching backends, making it simple to swap between memory, Redis, and Valkey without changing your application code.
+Developers should be able to switch cache providers easily using a single interface. This package provides a consistent API across different caching backends, making it simple to swap between memory, Redis, Valkey, and Memcached without changing your application code.
 
 ## ✨ Features
 
 - **Unified Interface**: Single API for all supported cache providers
 - **TypeScript Support**: Full type definitions and IntelliSense support
-- **Multiple Providers**: Memory (LRU), Redis, and Valkey support
+- **Multiple Providers**: Memory (LRU), Redis, Valkey, and Memcached support
 - **Factory Pattern**: Easy provider switching with configuration
 - **Serialization**: Safe JSON serialization with error handling
 - **TTL Support**: Time-to-live for cached values
@@ -62,6 +62,12 @@ const redisCache = createCache({
 const valkeyCache = createCache({
   provider: "valkey",
   options: { host: "localhost", port: 6379 },
+});
+
+// Memcached cache
+const memcachedCache = createCache({
+  provider: "memcached",
+  options: { host: "localhost", port: 11211 },
 });
 ```
 
@@ -162,6 +168,30 @@ const redisCache = createCache({
 });
 ```
 
+### Memcached Options
+
+```typescript
+// Using single host
+const memcachedCache = createCache({
+  provider: "memcached",
+  options: {
+    host: "localhost",
+    port: 11211,
+  },
+});
+
+// Using multiple hosts
+const memcachedCache = createCache({
+  provider: "memcached",
+  options: {
+    hosts: ["127.0.0.1:11211", "127.0.0.1:11212"],
+    timeout: 5000,
+    retries: 5,
+    poolSize: 10,
+  },
+});
+```
+
 ## 🏗️ Advanced Usage
 
 ### Direct Adapter Creation
@@ -171,12 +201,14 @@ import {
   createMemoryCache,
   createRedisCache,
   createValkeyCache,
+  createMemcachedCache,
 } from "cloud-cache-factory";
 
 // Create specific adapters directly
 const memoryCache = createMemoryCache({ maxSize: 500 });
 const redisCache = createRedisCache({ host: "localhost" });
 const valkeyCache = createValkeyCache({ host: "localhost" });
+const memcachedCache = createMemcachedCache({ host: "localhost" });
 ```
 
 ### Custom Serialization
@@ -217,11 +249,12 @@ npm run dev
 
 ## 📋 Supported Providers
 
-| Provider | Description                     | Use Case                                 |
-| -------- | ------------------------------- | ---------------------------------------- |
-| `memory` | In-memory LRU cache             | Development, testing, small applications |
-| `redis`  | Redis cache                     | Production, distributed applications     |
-| `valkey` | Valkey cache (Redis-compatible) | Production, Redis alternative            |
+| Provider    | Description                     | Use Case                                 |
+| ----------- | ------------------------------- | ---------------------------------------- |
+| `memory`    | In-memory LRU cache             | Development, testing, small applications |
+| `redis`     | Redis cache                     | Production, distributed applications     |
+| `valkey`    | Valkey cache (Redis-compatible) | Production, Redis alternative            |
+| `memcached` | Memcached cache                 | Production, high-performance caching     |
 
 ## 🔄 Migration Between Providers
 
@@ -241,6 +274,12 @@ const prodCache = createCache({
 const valkeyCache = createCache({
   provider: "valkey",
   options: { url: process.env.VALKEY_URL },
+});
+
+// Switch to Memcached
+const memcachedCache = createCache({
+  provider: "memcached",
+  options: { hosts: process.env.MEMCACHED_HOSTS?.split(",") },
 });
 ```
 
@@ -269,7 +308,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ### 0.1.0
 
 - Initial release
-- Memory, Redis, and Valkey adapters
+- Memory, Redis, Valkey, and Memcached adapters
 - Factory pattern implementation
 - TypeScript support
 - Comprehensive test suite
@@ -278,4 +317,5 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 - [Redis](https://redis.io/) - In-memory data structure store
 - [Valkey](https://valkey.io/) - Redis-compatible in-memory data store
+- [Memcached](https://memcached.org/) - High-performance distributed memory caching system
 - [LRU Cache](https://github.com/isaacs/node-lru-cache) - Fast LRU cache implementation
